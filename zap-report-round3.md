@@ -1,4 +1,4 @@
-# zap-report-round3
+# ZAP by Checkmarx Scanning Report
 
 ZAP by [Checkmarx](https://checkmarx.com/).
 
@@ -7,8 +7,8 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 
 | Risk Level | Number of Alerts |
 | --- | --- |
-| High | 0 |
-| Medium | 2 |
+| High | 1 |
+| Medium | 3 |
 | Low | 4 |
 | Informational | 4 |
 
@@ -19,11 +19,13 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 
 | Level | Reason | Site | Description | Statistic |
 | --- | --- | --- | --- | --- |
-| Low | Warning |  | ZAP errors logged - see the zap.log file for details | 1    |
-| Low | Warning |  | ZAP warnings logged - see the zap.log file for details | 2    |
-| Info | Informational | http://localhost:8003 | Percentage of responses with status code 2xx | 57 % |
-| Info | Informational | http://localhost:8003 | Percentage of responses with status code 3xx | 33 % |
-| Info | Exceeded Low | http://localhost:8003 | Percentage of responses with status code 4xx | 8 % |
+| High | Exceeded High |  | Percentage of memory used | 95    |
+| Low | Warning |  | ZAP errors logged - see the zap.log file for details | 121    |
+| Low | Warning |  | ZAP warnings logged - see the zap.log file for details | 42 211    |
+| Info | Informational | http://localhost:8003 | Percentage of responses with status code 2xx | 43 % |
+| Info | Informational | http://localhost:8003 | Percentage of responses with status code 3xx | 15 % |
+| Info | Exceeded Low | http://localhost:8003 | Percentage of responses with status code 4xx | 38 % |
+| Info | Informational | http://localhost:8003 | Percentage of responses with status code 5xx | 2 % |
 | Info | Informational | http://localhost:8003 | Percentage of endpoints with content type application/javascript | 13 % |
 | Info | Informational | http://localhost:8003 | Percentage of endpoints with content type image/png | 4 % |
 | Info | Informational | http://localhost:8003 | Percentage of endpoints with content type text/css | 4 % |
@@ -32,22 +34,23 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 | Info | Informational | http://localhost:8003 | Percentage of endpoints with method GET | 90 % |
 | Info | Informational | http://localhost:8003 | Percentage of endpoints with method POST | 9 % |
 | Info | Informational | http://localhost:8003 | Count of total endpoints | 22    |
-| Info | Exceeded Low | http://localhost:8003 | Percentage of slow responses | 7 % |
+| Info | Informational | http://localhost:8003 | Percentage of slow responses | 3 % |
 | Info | Informational | https://content-signature-2.cdn.mozilla.net | Percentage of responses with status code 2xx | 100 % |
 | Info | Informational | https://content-signature-2.cdn.mozilla.net | Percentage of endpoints with content type binary/octet-stream | 100 % |
 | Info | Informational | https://content-signature-2.cdn.mozilla.net | Percentage of endpoints with method GET | 100 % |
 | Info | Informational | https://content-signature-2.cdn.mozilla.net | Count of total endpoints | 1    |
+| Info | Informational | https://content-signature-2.cdn.mozilla.net | Percentage of slow responses | 50 % |
 | Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of responses with status code 2xx | 100 % |
 | Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of endpoints with content type application/octet-stream | 6 % |
 | Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of endpoints with content type text/plain | 93 % |
 | Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of endpoints with method GET | 100 % |
 | Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Count of total endpoints | 16    |
-| Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of slow responses | 100 % |
+| Info | Informational | https://firefox-settings-attachments.cdn.mozilla.net | Percentage of slow responses | 38 % |
 | Info | Informational | https://firefox.settings.services.mozilla.com | Percentage of responses with status code 2xx | 100 % |
 | Info | Informational | https://firefox.settings.services.mozilla.com | Percentage of endpoints with content type application/json | 100 % |
 | Info | Informational | https://firefox.settings.services.mozilla.com | Percentage of endpoints with method GET | 100 % |
-| Info | Informational | https://firefox.settings.services.mozilla.com | Count of total endpoints | 3    |
-| Info | Informational | https://firefox.settings.services.mozilla.com | Percentage of slow responses | 50 % |
+| Info | Informational | https://firefox.settings.services.mozilla.com | Count of total endpoints | 5    |
+| Info | Informational | https://firefox.settings.services.mozilla.com | Percentage of slow responses | 22 % |
 
 
 
@@ -56,8 +59,10 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 
 | Name | Risk Level | Number of Instances |
 | --- | --- | --- |
+| SQL Injection | High | 23 |
 | Absence of Anti-CSRF Tokens | Medium | 1 |
-| Cross-Domain Misconfiguration | Medium | 3 |
+| Cross-Domain Misconfiguration | Medium | 5 |
+| Format String Error | Medium | 23 |
 | Server Leaks Version Information via "Server" HTTP Response Header Field | Low | 1 |
 | Strict-Transport-Security Header Not Set | Low | Systemic |
 | Timestamp Disclosure - Unix | Low | Systemic |
@@ -73,6 +78,209 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 ## Alert Detail
 
 
+
+### [ SQL Injection ](https://www.zaproxy.org/docs/alerts/40018/)
+
+
+
+##### High (Low)
+
+### Description
+
+SQL injection may be possible.
+
+* URL: http://localhost:8003
+  * Node Name: `http://localhost:8003`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/
+  * Node Name: `http://localhost:8003/`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/cookiepolicy
+  * Node Name: `http://localhost:8003/cookiepolicy`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/favicon.ico
+  * Node Name: `http://localhost:8003/favicon.ico`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/login
+  * Node Name: `http://localhost:8003/login`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/privacypolicy
+  * Node Name: `http://localhost:8003/privacypolicy`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/register
+  * Node Name: `http://localhost:8003/register`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/reservation
+  * Node Name: `http://localhost:8003/reservation`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/resources
+  * Node Name: `http://localhost:8003/resources`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/robots.txt
+  * Node Name: `http://localhost:8003/robots.txt`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/sitemap.xml
+  * Node Name: `http://localhost:8003/sitemap.xml`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static
+  * Node Name: `http://localhost:8003/static`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/
+  * Node Name: `http://localhost:8003/static/`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/footer.html
+  * Node Name: `http://localhost:8003/static/footer.html`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/footer.js
+  * Node Name: `http://localhost:8003/static/footer.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/index.js
+  * Node Name: `http://localhost:8003/static/index.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/logo.png
+  * Node Name: `http://localhost:8003/static/logo.png`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/status.js
+  * Node Name: `http://localhost:8003/static/status.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/static/tailwind.css
+  * Node Name: `http://localhost:8003/static/tailwind.css`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/status.html%3Fmessage=%253Cstrong%253EValidation%2520Error(s&29%253A%253C%252Fstrong%253E%253Cbr%253EInvalid%2520email%2520or%2520password!&status=failed
+  * Node Name: `http://localhost:8003/status.html (message,status)`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/terms
+  * Node Name: `http://localhost:8003/terms`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/login
+  * Node Name: `http://localhost:8003/login ()(csrf_token,password,username)`
+  * Method: `POST`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+* URL: http://localhost:8003/register
+  * Node Name: `http://localhost:8003/register ()(birthdate,password,role,username)`
+  * Method: `POST`
+  * Parameter: `host`
+  * Attack: `localhost:8003'`
+  * Evidence: `HTTP/1.1 500 Internal Server Error`
+  * Other Info: ``
+
+
+Instances: 23
+
+### Solution
+
+Do not trust client side input, even if there is client side validation in place.
+In general, type check all data on the server side.
+If the application uses JDBC, use PreparedStatement or CallableStatement, with parameters passed by '?'
+If the application uses ASP, use ADO Command Objects with strong type checking and parameterized queries.
+If database Stored Procedures can be used, use them.
+Do *not* concatenate strings into queries in the stored procedure, or use 'exec', 'exec immediate', or equivalent functionality!
+Do not create dynamic SQL queries using simple string concatenation.
+Escape all data received from the client.
+Apply an 'allow list' of allowed characters, or a 'deny list' of disallowed characters in user input.
+Apply the principle of least privilege by using the least privileged database user possible.
+In particular, avoid using the 'sa' or 'db-owner' database users. This does not eliminate SQL injection, but minimizes its impact.
+Grant the minimum database access that is necessary for the application.
+
+### Reference
+
+
+* [ https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html ](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+
+
+#### CWE Id: [ 89 ](https://cwe.mitre.org/data/definitions/89.html)
+
+
+#### WASC Id: 19
+
+#### Source ID: 1
 
 ### [ Absence of Anti-CSRF Tokens ](https://www.zaproxy.org/docs/alerts/10202/)
 
@@ -158,8 +366,22 @@ Web browser data loading may be possible, due to a Cross Origin Resource Sharing
   * Attack: ``
   * Evidence: `access-control-allow-origin: *`
   * Other Info: `The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.`
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset%3F_expected=1771396598516&_since=%25221764570990070%2522
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset (_expected,_since)`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `access-control-allow-origin: *`
+  * Other Info: `The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.`
 * URL: https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset%3F_expected=1750871406038
   * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset (_expected)`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `access-control-allow-origin: *`
+  * Other Info: `The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.`
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset%3F_expected=0
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset (_expected)`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -174,7 +396,7 @@ Web browser data loading may be possible, due to a Cross Origin Resource Sharing
   * Other Info: `The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.`
 
 
-Instances: 3
+Instances: 5
 
 ### Solution
 
@@ -193,6 +415,221 @@ Configure the "Access-Control-Allow-Origin" HTTP header to a more restrictive se
 #### WASC Id: 14
 
 #### Source ID: 3
+
+### [ Format String Error ](https://www.zaproxy.org/docs/alerts/30002/)
+
+
+
+##### Medium (Medium)
+
+### Description
+
+A Format String error occurs when the submitted data of an input string is evaluated as a command by the application.
+
+* URL: http://localhost:8003
+  * Node Name: `http://localhost:8003`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/
+  * Node Name: `http://localhost:8003/`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/cookiepolicy
+  * Node Name: `http://localhost:8003/cookiepolicy`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/favicon.ico
+  * Node Name: `http://localhost:8003/favicon.ico`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/login
+  * Node Name: `http://localhost:8003/login`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/privacypolicy
+  * Node Name: `http://localhost:8003/privacypolicy`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/register
+  * Node Name: `http://localhost:8003/register`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/reservation
+  * Node Name: `http://localhost:8003/reservation`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/resources
+  * Node Name: `http://localhost:8003/resources`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/robots.txt
+  * Node Name: `http://localhost:8003/robots.txt`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/sitemap.xml
+  * Node Name: `http://localhost:8003/sitemap.xml`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static
+  * Node Name: `http://localhost:8003/static`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/
+  * Node Name: `http://localhost:8003/static/`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/footer.html
+  * Node Name: `http://localhost:8003/static/footer.html`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/footer.js
+  * Node Name: `http://localhost:8003/static/footer.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/index.js
+  * Node Name: `http://localhost:8003/static/index.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/logo.png
+  * Node Name: `http://localhost:8003/static/logo.png`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/status.js
+  * Node Name: `http://localhost:8003/static/status.js`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/static/tailwind.css
+  * Node Name: `http://localhost:8003/static/tailwind.css`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/status.html%3Fmessage=%253Cstrong%253EValidation%2520Error(s&29%253A%253C%252Fstrong%253E%253Cbr%253EInvalid%2520email%2520or%2520password!&status=failed
+  * Node Name: `http://localhost:8003/status.html (message,status)`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/terms
+  * Node Name: `http://localhost:8003/terms`
+  * Method: `GET`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/login
+  * Node Name: `http://localhost:8003/login ()(csrf_token,password,username)`
+  * Method: `POST`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+* URL: http://localhost:8003/register
+  * Node Name: `http://localhost:8003/register ()(birthdate,password,role,username)`
+  * Method: `POST`
+  * Parameter: `host`
+  * Attack: `ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
+`
+  * Evidence: ``
+  * Other Info: `Potential Format String Error. The script closed the connection on a /%s.`
+
+
+Instances: 23
+
+### Solution
+
+Rewrite the background program using proper deletion of bad character strings. This will require a recompile of the background executable.
+
+### Reference
+
+
+* [ https://owasp.org/www-community/attacks/Format_string_attack ](https://owasp.org/www-community/attacks/Format_string_attack)
+
+
+#### CWE Id: [ 134 ](https://cwe.mitre.org/data/definitions/134.html)
+
+
+#### WASC Id: 6
+
+#### Source ID: 1
 
 ### [ Server Leaks Version Information via "Server" HTTP Response Header Field ](https://www.zaproxy.org/docs/alerts/10036/)
 
@@ -258,29 +695,29 @@ HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby
   * Attack: ``
   * Evidence: ``
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: ``
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: ``
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: ``
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -326,36 +763,36 @@ A timestamp was disclosed by the application/web server. - Unix
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
-  * Evidence: `1500886253`
-  * Other Info: `1500886253, which evaluates to: 2017-07-24 10:50:53.`
+  * Evidence: `1703946492`
+  * Other Info: `1703946492, which evaluates to: 2023-12-30 16:28:12.`
 * URL: https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4
   * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
-  * Evidence: `1703946492`
-  * Other Info: `1703946492, which evaluates to: 2023-12-30 15:28:12.`
+  * Evidence: `1763601002`
+  * Other Info: `1763601002, which evaluates to: 2025-11-20 03:10:02.`
 * URL: https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4
   * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1773959826`
-  * Other Info: `1773959826, which evaluates to: 2026-03-19 23:37:06.`
+  * Other Info: `1773959826, which evaluates to: 2026-03-20 00:37:06.`
 * URL: https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4
   * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1827377968`
-  * Other Info: `1827377968, which evaluates to: 2027-11-28 05:59:28.`
+  * Other Info: `1827377968, which evaluates to: 2027-11-28 06:59:28.`
 * URL: https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4
   * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1889814595`
-  * Other Info: `1889814595, which evaluates to: 2029-11-19 21:29:55.`
+  * Other Info: `1889814595, which evaluates to: 2029-11-19 22:29:55.`
 
 Instances: Systemic
 
@@ -403,32 +840,32 @@ At "High" threshold this scan rule will not alert on client or server error resp
   * Evidence: ``
   * Other Info: `This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
 At "High" threshold this scan rule will not alert on client or server error responses.`
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644`
   * Method: `GET`
   * Parameter: `x-content-type-options`
   * Attack: ``
   * Evidence: ``
   * Other Info: `This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
 At "High" threshold this scan rule will not alert on client or server error responses.`
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8`
   * Method: `GET`
   * Parameter: `x-content-type-options`
   * Attack: ``
   * Evidence: ``
   * Other Info: `This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
 At "High" threshold this scan rule will not alert on client or server error responses.`
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c`
   * Method: `GET`
   * Parameter: `x-content-type-options`
   * Attack: ``
   * Evidence: ``
   * Other Info: `This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
 At "High" threshold this scan rule will not alert on client or server error responses.`
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6`
   * Method: `GET`
   * Parameter: `x-content-type-options`
   * Attack: ``
@@ -475,7 +912,7 @@ The given request has been identified as an authentication request. The 'Other I
   * Attack: ``
   * Evidence: `password`
   * Other Info: `userParam=username
-userValue=pipounet@test.com
+userValue=test@test.com
 passwordParam=password
 referer=http://localhost:8003/login
 csrfToken=csrf_token`
@@ -506,36 +943,36 @@ This is an informational alert rather than a vulnerability and so there is nothi
 
 The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.
 
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
   * Evidence: `public, max-age=3600`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
   * Evidence: `public, max-age=3600`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
   * Evidence: `public, max-age=3600`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
   * Evidence: `public, max-age=3600`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/f03fdd93-f567-440f-91a2-9da33bd8cc7c
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/f03fdd93-f567-440f-91a2-9da33bd8cc7c`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/ff42caea-2576-49ec-8bed-38bd01e50118
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/ff42caea-2576-49ec-8bed-38bd01e50118`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
@@ -548,8 +985,22 @@ The cache-control header has not been set properly or is missing, allowing the b
   * Attack: ``
   * Evidence: `max-age=3600`
   * Other Info: ``
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset%3F_expected=1771396598516&_since=%25221764570990070%2522
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset (_expected,_since)`
+  * Method: `GET`
+  * Parameter: `cache-control`
+  * Attack: ``
+  * Evidence: `max-age=3600`
+  * Other Info: ``
 * URL: https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset%3F_expected=1750871406038
   * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset (_expected)`
+  * Method: `GET`
+  * Parameter: `cache-control`
+  * Attack: ``
+  * Evidence: `max-age=3600`
+  * Other Info: ``
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset%3F_expected=0
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset (_expected)`
   * Method: `GET`
   * Parameter: `cache-control`
   * Attack: ``
@@ -602,29 +1053,29 @@ The content was retrieved from a shared cache. If the response data is sensitive
   * Attack: ``
   * Evidence: `HIT`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/1d8c39b7-d6d6-4d19-adf9-31065d9e4f48`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/47c73e1a-0449-4cac-adcb-929ce1d88644`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `HIT`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/35d44d46-c50e-4da8-86ee-b37948b4def3`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/a2d53d85-511b-4644-930b-891db71f2cc8`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `HIT`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/91d45f3d-3cb3-4d2a-87cd-b119e92491bc`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/bee937c5-37f9-46b7-b7f8-4c284e81051c`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `HIT`
   * Other Info: ``
-* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4
-  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/b9989ad3-6e40-4a58-b9f0-8f2b5684e5e4`
+* URL: https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6
+  * Node Name: `https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/tracking-protection-lists/c93ceb0e-0ed0-43c4-bc87-c8abeca12ca6`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -637,8 +1088,22 @@ The content was retrieved from a shared cache. If the response data is sensitive
   * Attack: ``
   * Evidence: `HIT`
   * Other Info: ``
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset%3F_expected=1771396598516&_since=%25221764570990070%2522
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/blocklists/collections/addons-bloomfilters/changeset (_expected,_since)`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `HIT`
+  * Other Info: ``
 * URL: https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset%3F_expected=1750871406038
   * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/mfcdm-origins-list/changeset (_expected)`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `HIT`
+  * Other Info: ``
+* URL: https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset%3F_expected=0
+  * Node Name: `https://firefox.settings.services.mozilla.com/v1/buckets/monitor/collections/changes/changeset (_expected)`
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -656,7 +1121,28 @@ The content was retrieved from a shared cache. If the response data is sensitive
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
-  * Evidence: `Age: 353`
+  * Evidence: `Age: 1489`
+  * Other Info: `The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.`
+* URL: https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain
+  * Node Name: `https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `Age: 3394`
+  * Other Info: `The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.`
+* URL: https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain
+  * Node Name: `https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `Age: 3567`
+  * Other Info: `The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.`
+* URL: https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain
+  * Node Name: `https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-03-28-10-13-31.chain`
+  * Method: `GET`
+  * Parameter: ``
+  * Attack: ``
+  * Evidence: `Age: 535`
   * Other Info: `The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.`
 
 Instances: Systemic
